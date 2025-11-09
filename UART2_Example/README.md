@@ -3,10 +3,10 @@
 This project demonstrates basic data transmission via the UART2 peripheral on an STM32F4xx microcontroller using the polling method.
 
 ## 🛠 Hardware & Software
-* **MCU:** STM32F407
+* **MCU:** STM32F407 
 * **IDE:** STM32CubeIDE
 * **Terminal Software:** Tera Term
-* **Logic Analyzer:** Saleae Logic
+* **Logic Analyzer:** Saleae Logic 
 
 ## ⚙️ UART Configuration
 * **Baud Rate:** 9600 bps
