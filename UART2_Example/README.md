@@ -1,37 +1,46 @@
-# UART2 Communication Example (Polling Mode)
+# UART Lowercase to Uppercase Converter
 
-This project demonstrates basic data transmission via the UART2 peripheral on an STM32F4xx microcontroller using the polling method.
+This application receives characters from a PC via UART on an STM32 microcontroller, converts lowercase letters to uppercase, and sends the processed string back to the PC.
 
-## 🛠 Hardware & Software
-* **MCU:** STM32F407 
-* **IDE:** STM32CubeIDE
-* **Terminal Software:** Tera Term
-* **Logic Analyzer:** Saleae Logic 
+## ⚙️ Configuration & Settings
 
-## ⚙️ UART Configuration
-* **Baud Rate:** 9600 bps
-* **Word Length:** 8 Bits
-* **Stop Bits:** 1
-* **Parity:** None
-* **Mode:** Asynchronous
-* **Pins:** PA2 (TX) / PA3 (RX) - Alternate Function 7 (AF7)
+Correct terminal configuration is essential for successful communication.
 
----
+### 1\. Serial Port Settings
 
-## 📊 Test Results & Verification
+The project is configured to operate at **9600 baud rate**.
 
-The project has been verified both at the application level (terminal output) and at the physical signal level (logic analyzer).
+  * **Port:** COM6 
+  * **Speed:** 9600 bps
+  * **Data:** 8 bit
+  * **Parity:** none
+  * **Stop bits:** 1 bit
+  * **Flow control:** none
 
-### 1. Terminal Output (Tera Term)
-Validates that the data string sent by the MCU is correctly received and decoded by the PC.
-![Tera Term Output](Images/TeraTerm_Output.png)
+### 2\. Terminal Settings
 
-### 2. Signal Analysis (Logic Analyzer)
-Verifies the UART protocol timing, baud rate accuracy, and frame structure (Start/Stop bits) at the physical layer.
-![Logic Analyzer Output](Images/LogicAnalyzer_Output.png)
+**Local echo** must be enabled to see transmitted characters on the screen.
 
----
+  * **Receive:** CR+LF (Carriage Return + Line Feed)
+  * **Transmit:** CR (Carriage Return)
+  * **Local echo:** Checked (Enabled)
 
-## 📝 Notes
-* The standard `HAL_UART_Transmit` function is used in blocking (polling) mode for simplicity.
-* The logic analyzer probe was connected to the PA2 (TX) pin for signal capturing.
+-----
+
+## 📊 Test Results
+
+### Terminal Output
+
+Upon starting, the application sends the message "The application is running". It then waits for user input. The input string "upper case test" is received by the MCU, converted to "UPPER CASE TEST", and transmitted back.
+
+### Logic Analyzer Signal View
+
+The physical signal changes on the UART transmission line (Channel D0) during data transfer are shown below.
+
+-----
+
+## 📝 Code Overview
+
+  * **`main()`**: Initializes HAL, system clock, and UART2. Sends a welcome message, then enters a loop to receive characters until a Carriage Return ('\\r') is detected. Each received character is converted to uppercase and stored in a buffer. Finally, the converted string is transmitted back.
+  * **`UART2_Init()`**: Configures USART2 with 9600 baud rate, 8 data bits, 1 stop bit, and no parity.
+  * **`convert_to_capital()`**: Helper function that checks if a character is a lowercase letter ('a'-'z') and converts it to its uppercase equivalent by subtracting 32 from its ASCII value.
