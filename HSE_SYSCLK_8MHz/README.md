@@ -51,5 +51,5 @@ As shown in the output below, the MCU is running at the expected 8MHz SYSCLK and
 ---
 
 ## 📝 Important Notes
-* **HSE Bypass Mode:** `RCC_HSE_BYPASS` is used because the clock is provided by the ST-LINK MCO pin on the Nucleo board, not a direct crystal resonator.
+* **HSE Configuration:** Although the STM32F407 Discovery board has an onboard 8 MHz crystal (normally requiring `RCC_HSE_ON`), this project was tested and verified to also work in `RCC_HSE_BYPASS` mode. The firmware is currently configured to use **HSE Bypass** mode for demonstration purposes.
 * **SysTick:** The SysTick timer is reconfigured after the clock change to ensure correct 1ms delay timing.
