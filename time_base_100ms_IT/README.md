@@ -48,7 +48,9 @@ The output (captured from pin PD15) confirms the GPIO pin toggles precisely ever
 
 ### Reference: Timer Configuration
 The basic timer (TIM6) is activated in the CubeMX configuration.
+
 ![CubeMX activation of TIM6](Images/Timer-6_Activation.png)
 
 This datasheet snippet describes the TIM6 basic timer as a 16-bit auto-reload up-counter, capable of "Interrupt/DMA generation on the update event: counter overflow."
+
 ![TIM6 Datasheet Information](Images/BasicTimers.png)
